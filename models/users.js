@@ -1,7 +1,9 @@
 const {Schema, model} = require('mongoose');
+const thoughtSchema = require("./Thought");
+
 
 // containing thougths, friends, username, and email
-const userSchema = new Schema (
+const userSchema = new Schema(
   {
     username: { type: String,min: [4, "Too few characters"], trim: true, required: true},
     email: {
@@ -13,8 +15,8 @@ const userSchema = new Schema (
 	message: props => `$props.value} is not a valid email address`
       }
     },
-    thougths: [{type: String,trim: true }],
-    friends: [{type: STring, trim: true }]
+    thougths: [{type: thoughtSchema}],
+    friends: [{type: userSchema}]
   },
   {
     toJSON: {
