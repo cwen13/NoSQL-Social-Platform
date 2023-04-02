@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 const {
   getUsers,
   getUser,
@@ -12,7 +13,7 @@ const {
 
 } = require("../../controllers/usersController");
 
-
+// /api/users
 router.route("/")
   .get(getUsers)
   .post(createUser);

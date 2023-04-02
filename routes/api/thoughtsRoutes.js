@@ -9,7 +9,7 @@ const {
   deleteReaction
 } = require("./../../controllers/thoughtsControllers")
 
-
+// /api/thoughts
 router.route("/")
   .get(getThoughts)
   .post(addReaction);
@@ -21,4 +21,5 @@ router.route("/:id/reaction")
   .get(getReactions);
 
 router.route("/:id/reaction/:rid")
-  .get(getReaction);
+  .get(getReaction)
+  .delete(deleteReaciton);
