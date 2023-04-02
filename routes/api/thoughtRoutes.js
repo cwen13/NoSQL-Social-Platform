@@ -7,7 +7,7 @@ const {
   getReaction,
   addReaciton,
   deleteReaction
-} = require("./../../controllers/thoughtsControllers")
+} = require("./../../controllers/api/thoughtControllers")
 
 // /api/thoughts
 router.route("/")
@@ -22,4 +22,4 @@ router.route("/:id/reaction")
 
 router.route("/:id/reaction/:rid")
   .get(getReaction)
-  .delete(deleteReaciton);
+//  .delete(deleteReaciton);

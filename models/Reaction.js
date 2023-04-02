@@ -1,8 +1,13 @@
 const {Schema, model} = require('mongoose');
 
 // contining thought id, user id, date created, and reaction text
-const reacitonSchema = new Schema(
+const reactionSchema = new Schema(
   {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+
     thoughtId: {type: String},
     userId: {type: String},
     dateCreated: {type: Date, default: Date.now()},
@@ -16,7 +21,7 @@ const reacitonSchema = new Schema(
 );
 
 
-const Reaction = mongoose.model("Reaciton", reactionSchema);
+const Reaction = model("Reaciton", reactionSchema);
 
-module.exports = Reaction;
+module.exports = reactionSchema;
 

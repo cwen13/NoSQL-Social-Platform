@@ -1,7 +1,7 @@
 // Routes need to include create, update, and delete api calls
 const {User} = require("./../../models");
 
-modue.exports = {
+module.exports = {
   // DONE route to return all users
   getUsers(req, res) {
     User.find({}, (err,result) => {
@@ -25,16 +25,16 @@ modue.exports = {
       .catch((err) => json(err));
   },
   
-  // TODO route to delete user
-  deleteUser(req,res){ 
-    User.findOneAndDelete({_id: req.params.id})
-      .then((user) =>
-	!user
-	  ? res.status(404).json({message:"No user with that ID"})
-	// TODO finish this up
-	  : User.deleteMany({_id: {$in:  }});
-      )
-  },
+//  // TODO route to delete user
+//  deleteUser(req,res){ 
+//    User.findOneAndDelete({_id: req.params.id})
+//      .then((user) =>
+//	!user
+//	  ? res.status(404).json({message:"No user with that ID"})
+//	// TODO finish this up
+//	  : User.deleteMany({_id: {$in:  }});
+//      )
+//  },
 
   // DONE route to post create new user
   createUser(req,res) {
@@ -58,37 +58,37 @@ modue.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // TODO get a user's friends
-  getFriends(req,res) {
-    User.find({_id: req.paramss.id})
-      .then((user) =>
-	!user
-	  ? res.status(400).json({message: `No user with ID ${req.params.id}`})
-	// continue ere to deelte this user through all friends list
-	  : User
-    
-  },
-
-  // TODO get a user's friend
-  getFriend(req,res) {
-    User.find(
-      {
-	_id: req.params.id,
-	friends[`${fid}`],
-      }
-      
-  },
-  
-  //TODO route to add user's friends
-  addFriend(req,res) {
-    User.findOneAndUpdate(
-      {_id: req.params.id},
-      {$addToSet:
-       {asignment: req.params.fid}}
-    },
-  }
-  
-  // TODO route to delet user's friends
-  deleteFriend(req,res) {
-    User.findByIdAndDelete(req.params.id}
-  },
+//  // TODO get a user's friends
+//  getFriends(req,res) {
+//    User.find({_id: req.paramss.id})
+//      .then((user) =>
+//	!user
+//	  ? res.status(400).json({message: `No user with ID ${req.params.id}`})
+//	// continue ere to deelte this user through all friends list
+//	  : User
+//    
+//  },
+//
+//  // TODO get a user's friend
+//  getFriend(req,res) {
+//    User.find(
+//      {
+//	_id: req.params.id,
+//	friends[`${fid}`],
+//      }
+//      
+//  },
+//  
+//  //TODO route to add user's friends
+//  addFriend(req,res) {
+//    User.findOneAndUpdate(
+//      {_id: req.params.id},
+//      {$addToSet:
+//       {asignment: req.params.fid}}
+//    },
+//  }
+//  
+//  // TODO route to delet user's friends
+//  deleteFriend(req,res) {
+//    User.findByIdAndDelete(req.params.id}
+};

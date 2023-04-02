@@ -2,7 +2,7 @@ const {Thought} = require("./../../models");
 
 // Routes need to include create, update, and delete api calls
 
-modue.exports = {
+module.exports = {
   // DONE route to return all thoughts
   getThoughts(req,res) {
     Thought.find()
@@ -37,9 +37,10 @@ modue.exports = {
       .catch((err) => res.json(err)):,
   },
   
-  // TODO route to delete reaciton to a  thought
-  deleteReaction(req,res) {
-    Thought.FindById({_id: req.params.id})
+//  // TODO route to delete reaciton to a  thought
+//  deleteReaction(req,res) {
+//    Thought.FindById({_id: req.params.id})
+//
+//  }
 
-  }
 };
