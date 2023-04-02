@@ -8,7 +8,7 @@ const thoughtSchema = new Schema(
 	       dateCreated; {type: Date, default: Date.now()},
 	       reactions: [{type: String, trim: true}]
 	      },
-    reactions: [reactionSchema]
+    reactions: [{type: reactionSchema}]
   },
     {
       toJSON: {
