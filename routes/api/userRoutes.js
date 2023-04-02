@@ -30,3 +30,5 @@ router.route("/:id")
 //router.route("/:id/friends/:fid")
 //  .get(getFriend)
 //  .delete(deleteFriend);
+
+module.exports = router;

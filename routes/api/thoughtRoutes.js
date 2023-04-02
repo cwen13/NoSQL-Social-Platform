@@ -5,21 +5,23 @@ const {
   getThought,
   getReactions,
   getReaction,
-  addReaciton,
+  addReaction,
   deleteReaction
 } = require("./../../controllers/api/thoughtControllers")
 
 // /api/thoughts
 router.route("/")
-  .get(getThoughts)
-  .post(addReaction);
+  .get(getThoughts);
 
 router.route("/:id")
-  .get(getThought);
+  .get(getThought)
+//  .post(addReaction);
 
 router.route("/:id/reaction")
-  .get(getReactions);
+//  .get(getReactions);
 
 router.route("/:id/reaction/:rid")
-  .get(getReaction)
+//  .get(getReaction)
 //  .delete(deleteReaciton);
+
+module.exports = router;

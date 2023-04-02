@@ -19,7 +19,7 @@ module.exports = {
 	  ? res.status(404).json({message: "There is no thought with that ID"})
 	  : res.json(thought)
       )
-      .catch((err) => res.json(err)):
+      .catch((err) => res.json(err));
   },
 
   // DONE route to post reaction to a thought
@@ -34,7 +34,7 @@ module.exports = {
 	  ? res.status(404).json({message: "There is no thought with that ID"})
 	  : res.json(thought)
       )
-      .catch((err) => res.json(err)):,
+      .catch((err) => res.json(err));
   },
   
 //  // TODO route to delete reaciton to a  thought
