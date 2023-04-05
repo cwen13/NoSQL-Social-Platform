@@ -4,13 +4,26 @@ const reactionSchema = require("./Reaction");
 // containing text, username, date created, and reaction list
 const thoughtSchema = new Schema(
   {
-    thoughtId: {
+    thoughtId:
+    {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    thoughtText: {type: String,trim: true, required: true},
-    username: {type: String, trim: true},
-    dateCreated: {type: Date, default: Date.now()},
+    thoughtText:
+    {
+      type: String,
+      trim: true,
+      required: true
+    },
+    userName:
+    {
+      type: String,
+      trim: true
+    },
+    dateCreated:
+    {
+      type: Date,
+      default: Date.now()},
     reactions: [reactionSchema]
   },
     {

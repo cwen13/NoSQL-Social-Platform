@@ -8,7 +8,11 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectsId()
     },
-    username: { type: String,min: [4, "Too few characters"], trim: true, required: true},
+    userName: {
+      type: String,
+      min: [4, "Too few characters"],
+      trim: true,
+      required: true},
     email: {
       type: String,
       trim: true,
