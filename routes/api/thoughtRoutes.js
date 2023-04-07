@@ -18,7 +18,7 @@ router.route("/:id")
   .post(addReaction);
 
 router.route("/:id/reaction")
-//  .get(getReactions);
+  .get(getReactions);
 
 router.route("/:id/reaction/:rid")
 //  .get(getReaction)

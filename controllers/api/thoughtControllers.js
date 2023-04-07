@@ -28,10 +28,7 @@ module.exports = {
       {_id: req.params.id},
       {$push:
        {
-	 reactions:
-	 
-	 req.body
-	 
+	 reactions: req.body
        }
       },
       {
@@ -46,8 +43,23 @@ module.exports = {
       )
       .catch((err) => res.json(err));
   },
+
+
+  //route to get the thoght and its reactions
+  getReactions(req,res) {
+    Thought.findOne ({_id: req.params.id})
+      .select("__v")
+      .populate("reactions")
+      .then((reactions) =>
+	!reactions
+	  ? res.status(404).json({message:"There are no reactions to this thought"})
+	  : res.json(reactions)
+      )
+  },
   
-//  // TODO route to delete reaciton to a  thought
+	
+  
+  //  // TODO route to delete reaciton to a  thought
 //  deleteReaction(req,res) {
 //    Thought.FindById({_id: req.params.id})
 //
