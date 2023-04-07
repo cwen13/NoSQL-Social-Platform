@@ -6,7 +6,7 @@ module.exports = {
   // DONE route to return all thoughts
   getThoughts(req,res) {
     Thought.find()
-    ,then((thought) => res.json(thought))
+    .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err)) 
   },
   
@@ -23,11 +23,21 @@ module.exports = {
   },
 
   // DONE route to post reaction to a thought
-  postReaction(req,res) {
+  addReaction(req,res) {
     Thought.findOneAndUpdate(
       {_id: req.params.id},
-      {$set: req.body},
-      {runValidators: true, new: true}
+      {$push:
+       {
+	 reactions:
+	 
+	 req.body
+	 
+       }
+      },
+      {
+	runValidators: true,
+	new: true
+      }
     )
       .then((thought) =>
 	!thought

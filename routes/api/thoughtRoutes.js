@@ -15,7 +15,7 @@ router.route("/")
 
 router.route("/:id")
   .get(getThought)
-//  .post(addReaction);
+  .post(addReaction);
 
 router.route("/:id/reaction")
 //  .get(getReactions);
