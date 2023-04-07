@@ -4,7 +4,7 @@ const {
   getThoughts,
   getThought,
   getReactions,
-  getReaction,
+//  getReaction,
   addReaction,
   deleteReaction
 } = require("./../../controllers/api/thoughtControllers")
@@ -21,7 +21,7 @@ router.route("/:id/reaction")
   .get(getReactions);
 
 router.route("/:id/reaction/:rid")
-  .get(getReaction)
+//  .get(getReaction)
   .delete(deleteReaction);
 
 module.exports = router;

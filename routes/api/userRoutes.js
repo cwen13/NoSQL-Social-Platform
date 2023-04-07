@@ -21,12 +21,12 @@ router.route("/")
 router.route("/:id")
   .get(getUser)
   .put(updateUser)
-//  .delete(deleteUser);
+  .delete(deleteUser);
 
 //router.route("/:id/friends")
 //  .get(getFriends)
 //  .post(addFriend);
-//
+
 //router.route("/:id/friends/:fid")
 //  .get(getFriend)
 //  .delete(deleteFriend);

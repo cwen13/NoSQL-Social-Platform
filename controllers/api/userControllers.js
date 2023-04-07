@@ -1,5 +1,5 @@
 // Routes need to include create, update, and delete api calls
-const {User} = require("./../../models");
+const {User, Thought} = require("./../../models");
 
 module.exports = {
   // DONE route to return all users
@@ -25,16 +25,15 @@ module.exports = {
       .catch((err) => json(err));
   },
   
-//  // TODO route to delete user
-//  deleteUser(req,res){ 
-//    User.findOneAndDelete({_id: req.params.id})
-//      .then((user) =>
-//	!user
-//	  ? res.status(404).json({message:"No user with that ID"})
-//	// TODO finish this up
-//	  : User.deleteMany({_id: {$in:  }});
-//      )
-//  },
+  // DONE route to delete user
+  deleteUser(req,res){ 
+    User.findOneAndDelete({_id: req.params.id})
+      .then((user) =>
+	!user
+	  ? res.status(404).json({message:"No user with that ID"})
+	  : res.json(user)
+      );
+  },
 
   // DONE route to post create new user
   createUser(req,res) {
