@@ -45,9 +45,9 @@ module.exports = {
   },
 
 
-  //route to get the thoght and its reactions
+  // DONE route to get the thoght and its reactions
   getReactions(req,res) {
-    Thought.findOne ({_id: req.params.id})
+    Thought.findOne({_id: req.params.id})
       .select("__v")
       .populate("reactions")
       .then((reactions) =>
@@ -56,7 +56,20 @@ module.exports = {
 	  : res.json(reactions)
       )
   },
-  
+
+  // get a sinlge reaciton
+  getReaction(req,res) {
+    Thought.findOneAndUpdate(
+      {_id: req.params.id},
+      {$pull: {reactions: {_id: req.params.rid}}},
+      { runValidators: true, new: true }
+    )
+      .then((reactions) =>
+	!reactions
+	  ? res.status(404).json({message:"There are no reactions to this thought"})
+	  : res.json(reactions)
+      ); 
+  },
 	
   
   //  // TODO route to delete reaciton to a  thought
