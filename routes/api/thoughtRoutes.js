@@ -21,7 +21,7 @@ router.route("/:id/reaction")
   .get(getReactions);
 
 router.route("/:id/reaction/:rid")
-//  .get(getReaction)
-//  .delete(deleteReaciton);
+  .get(getReaction)
+  .delete(deleteReaciton);
 
 module.exports = router;
