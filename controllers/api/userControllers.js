@@ -57,37 +57,50 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-//  // TODO get a user's friends
-//  getFriends(req,res) {
-//    User.find({_id: req.paramss.id})
-//      .then((user) =>
-//	!user
-//	  ? res.status(400).json({message: `No user with ID ${req.params.id}`})
-//	// continue ere to deelte this user through all friends list
-//	  : User
-//    
-//  },
-//
+  // TODO get a user's friends
+  getFriends(req,res) {
+    User.find({_id: req.params.id})
+      .select("-__v")
+      .populate("friends")
+      .then((friends) =>
+	!friends
+	  ? res.status(404).json({message: "They have no friends right now"})
+	  : res.json(friends)
+      );
+  },
+
 //  // TODO get a user's friend
 //  getFriend(req,res) {
 //    User.find(
 //      {
 //	_id: req.params.id,
-//	friends[`${fid}`],
+//	
 //      }
 //      
 //  },
-//  
-//  //TODO route to add user's friends
-//  addFriend(req,res) {
-//    User.findOneAndUpdate(
-//      {_id: req.params.id},
-//      {$addToSet:
-//       {asignment: req.params.fid}}
-//    },
-//  }
-//  
-//  // TODO route to delet user's friends
+  
+  //TODO route to add user's friends
+  addFriend(req,res) {
+    User.findOneAndUpdate(
+      {_id: req.params.id},
+      {$addToSet:
+       {
+	 friend: req.body
+       }
+      },
+      {
+	runValidators: true,
+	new: true
+      }
+  
+    ).then((friend) =>
+      !friend
+	? res.status(404).json({message: "an not add this friend"})
+	: res.json(friend))
+      .catch((err) => res.json(err));
+  }
+  //  
+  //  // TODO route to delet user's friends
 //  deleteFriend(req,res) {
 //    User.findByIdAndDelete(req.params.id}
 };

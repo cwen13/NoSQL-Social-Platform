@@ -1,40 +1,30 @@
 const {Schema, model} = require('mongoose');
+const reactionSchema = require("Reaction");
 
 // containing text, username, date created, and reaction list
 const thoughtSchema = new Schema(
   {
-    thoughtId:
-    {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
     thoughtText:
     {
       type: String,
       trim: true,
-      required: true
+      required: true,
+      minLength: 1,
+      maxLength: 280
     },
-    userName:
-    {
-      type: String,
-      trim: true
-    },
-    dateCreated:
+    createdAt:
     {
       type: Date,
       default: Date.now()
     },
+    username:
+    {
+      type:String,
+      required:true,
+    },
     reactions: [
       {
-	reactionText: {
-	  type: String,
-	  trim:true,
-	  required:true
-	},
-	reactionDate: {
-	  type: Date,
-	  default: Date.now
-	}
+	type: reactionSchema
       }
     ]
   },

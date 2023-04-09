@@ -139,15 +139,22 @@ const getRandomUserName = () =>
 const getRandomEmail = () =>
       `${getRandomArrItem(names)}@${getRamdomArrItem(lorum)}.com`;
 
-const getRandomThought = () =>
-      `${getRandomArrItem(thoughts)}`;
+const getRandomThoughts = (int) => {
+  const thoughts = [];
+  for (let i = 0; i < int; i++) {
+    thoughts.push({
+      thoughtText: getRandomArrItem(thoughts),
+    });
+  }
+  return thoughts;
+}
 
 
 // Export the functions for use in seed.js
 module.exports = {
   getRandomName,
   getRandomEmail,
-  getRandomThought,
+  getRandomThoughts,
   getRandomUserName,
   genRandomIndex
 };

@@ -48,7 +48,7 @@ module.exports = {
   // DONE route to get the thoght and its reactions
   getReactions(req,res) {
     Thought.findOne({_id: req.params.id})
-      .select("__v")
+      .select("-__v")
       .populate("reactions")
       .then((reactions) =>
 	!reactions
