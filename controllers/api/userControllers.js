@@ -3,7 +3,7 @@ const {User, Thought} = require("./../../models");
 
 module.exports = {
   // DONE route to return all users
-  getUsers(req, res) {
+  getAllUsers(req, res) {
     User.find({}, (err,result) => {
       if (err) {
 	res.status(500).send(err);
@@ -15,7 +15,7 @@ module.exports = {
   
   // DONE route to get sinlge user
   getUser(req, res) {
-    User.findOne({_id: req.params.id})
+    User.findOne({_id: req.params.userId})
       .select("-__v")
       .then((user) =>
 	!user
@@ -27,7 +27,7 @@ module.exports = {
   
   // DONE route to delete user
   deleteUser(req,res){ 
-    User.findOneAndDelete({_id: req.params.id})
+    User.findOneAndDelete({_id: req.params.userId})
       .then((user) =>
 	!user
 	  ? res.status(404).json({message:"No user with that ID"})
@@ -45,47 +45,26 @@ module.exports = {
   // DONE route to put to update user info
   updateUser(req,res) {
     User.findOneAndUpdate(
-      {_id: req.params.id},
-      { $set: req.body},
-      {runValidators: true, new:true}
+      {_id: req.params.userId},
+      {$set: req.body},
+      {runValidators: true}
     )
       .then((user) =>
-	!course
+	!user
 	  ? res.status(404).json({message: "No user with that id"})
 	  : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
 
-  // TODO get a user's friends
-  getFriends(req,res) {
-    User.find({_id: req.params.id})
-      .select("-__v")
-      .populate("friends")
-      .then((friends) =>
-	!friends
-	  ? res.status(404).json({message: "They have no friends right now"})
-	  : res.json(friends)
-      );
-  },
-
-//  // TODO get a user's friend
-//  getFriend(req,res) {
-//    User.find(
-//      {
-//	_id: req.params.id,
-//	
-//      }
-//      
-//  },
   
-  //TODO route to add user's friends
+  // DONE route to add user's friends
   addFriend(req,res) {
     User.findOneAndUpdate(
-      {_id: req.params.id},
+      {_id: req.params.userId},
       {$addToSet:
        {
-	 friend: req.body
+	 friend: req.params.friendId
        }
       },
       {
@@ -99,8 +78,17 @@ module.exports = {
 	: res.json(friend))
       .catch((err) => res.json(err));
   }
-  //  
-  //  // TODO route to delet user's friends
-//  deleteFriend(req,res) {
-//    User.findByIdAndDelete(req.params.id}
+  
+  // DONE route to delet user's friends
+  deleteFriend(req,res) {
+    User.findByIdAndUpdate(
+      {req.params.userId},
+      {$pull: {friends: {_id: req.params.friendId}}},
+    )
+      .then((user) =>
+	!user
+	  ? res.status(404).json({message:"They were not a friend of thiers"})
+	  : res.json(user)
+      );
+  }
 };

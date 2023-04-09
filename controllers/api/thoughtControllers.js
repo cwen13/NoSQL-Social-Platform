@@ -4,7 +4,7 @@ const {Thought} = require("./../../models");
 
 module.exports = {
   // DONE route to return all thoughts
-  getThoughts(req,res) {
+  getAllThoughts(req,res) {
     Thought.find()
     .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err)) 
@@ -12,7 +12,7 @@ module.exports = {
   
   // DONE route to get single thought
   getThought(req,res) {
-    Thought.findOne({_id: req.params.id})
+    Thought.findOne({_id: req.params.thoughtId})
       .select("-__v")
       .then((thought) =>
 	!thought
@@ -22,8 +22,28 @@ module.exports = {
       .catch((err) => res.json(err));
   },
 
+  // DONE create user
+  createThought(req,res) => {
+    Thought.create(req.body)
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // DONE update a thought
+  updatethought(req,res) => {
+    Thought.findOneAndUpdate(
+      {_id: req.params.thoughtId}
+      {req.body}
+    )
+      .then((thought) =>
+	!thought
+	  ? res.status(404).json({message: "There is no thought with that ID"})
+	  : res.json(thought));
+	
+  },
+
   // DONE route to post reaction to a thought
-  addReaction(req,res) {
+  createReaction(req,res) {
     Thought.findOneAndUpdate(
       {_id: req.params.id},
       {$push:
@@ -44,38 +64,11 @@ module.exports = {
       .catch((err) => res.json(err));
   },
 
-
-  // DONE route to get the thoght and its reactions
-  getReactions(req,res) {
-    Thought.findOne({_id: req.params.id})
-      .select("-__v")
-      .populate("reactions")
-      .then((reactions) =>
-	!reactions
-	  ? res.status(404).json({message:"There are no reactions to this thought"})
-	  : res.json(reactions)
-      )
-  },
-
-//  // get a sinlge reaciton
-//  getReaction(req,res) {
-//    Thought.findOneAndUpdate(
-//      {_id: req.params.id},
-//    )
-//      .then((thought) =>
-//	!thought["reactions"]
-//	  ? res.status(404).json({message:"There are no reactions to this thought"})
-//	  : res.json(thought["reactions"])
-//      );   
-//  },
-//	
-  
   // DONE route to delete reaciton to a  thought
   deleteReaction(req,res) {
     Thought.findOneAndUpdate(
       {_id: req.params.id},
-      {$pull: {reactions: {_id: req.params.rid}}},
-      { runValidators: true, new: true }
+      {$pull: {reactions: {_id: req.params.reactinoId}}}
     )
       .then((reactions) =>
 	!reactions
