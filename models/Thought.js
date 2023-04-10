@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose');
-const reactionSchema = require("Reaction");
+const reactionSchema = require("./Reaction");
 
 // containing text, username, date created, and reaction list
 const thoughtSchema = new Schema(

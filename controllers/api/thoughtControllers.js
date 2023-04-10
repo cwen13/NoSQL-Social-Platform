@@ -23,17 +23,18 @@ module.exports = {
   },
 
   // DONE create user
-  createThought(req,res) => {
+  createThought(req,res) {
     Thought.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
 
   // DONE update a thought
-  updatethought(req,res) => {
+  updatethought(req,res) {
     Thought.findOneAndUpdate(
-      {_id: req.params.thoughtId}
-      {req.body}
+      {_id: req.params.thoughtId},
+      {$set: req.body},
+      {runValidators: true}
     )
       .then((thought) =>
 	!thought

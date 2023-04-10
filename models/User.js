@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose');
 // containing thougths, friends, username, and email
 const userSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       min: [4, "Too few characters"],
       trim: true,
@@ -24,7 +24,7 @@ const userSchema = new Schema(
 	ref: "Thought"
       }
     ],
-    friends [
+    friends: [
       {
 	type: Schema.Types.ObjectId,
 	ref: "User"
