@@ -14,21 +14,17 @@ connection.once("open", async () => {
   for (let i = 0; i < 10; i++) {
     const username = getRandomUserName();
     const email = getRandomUserName()+"@orgorg.org";
+    let {wroteUser, userId } = await User.collection.insertOne({username,email})
 
-    users.push({username,email})
-  }
-  await User.collection.insertMany(users);
-
-  for (let i=0; i<users.length-1; i++) {
     const thoughts = getRandomThoughts(5);
-    for (let j=0; j<thoughts.length-1; j++) {
-      Thought.create(
-	{
-	  thoughtText: thoughts[j],
-	  username: users[i][0]
-	}
-      );
-    }
+    console.log(thoughts);
+
+    Thought.collection.insertOne(
+      {
+	thoughtText: thoughts,
+	username: username
+      }
+    );
   }
     
   console.log("Seeding is complete");

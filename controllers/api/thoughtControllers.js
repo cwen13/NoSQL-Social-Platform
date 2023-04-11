@@ -30,18 +30,18 @@ module.exports = {
   },
 
   // DONE update a thought
-  updatethought(req,res) {
-    Thought.findOneAndUpdate(
-      {_id: req.params.thoughtId},
-      {$set: req.body},
-      {runValidators: true}
-    )
-      .then((thought) =>
-	!thought
-	  ? res.status(404).json({message: "There is no thought with that ID"})
-	  : res.json(thought));
-	
-  },
+//  updatethought(req,res) {
+//    Thought.findOneAndUpdate(
+//      {_id: req.params.thoughtId},
+//      {$set: req.body},
+//      {runValidators: true}
+//    )
+//      .then((thought) =>
+//	!thought
+//	  ? res.status(404).json({message: "There is no thought with that ID"})
+//	  : res.json(thought));
+//	
+//  },
 
   // DONE route to post reaction to a thought
   createReaction(req,res) {
@@ -67,9 +67,9 @@ module.exports = {
 
   // DONE route to delete reaciton to a  thought
   deleteReaction(req,res) {
-    Thought.findOneAndUpdate(
+    Thought.findOneAndDelete(
       {_id: req.params.id},
-      {$pull: {reactions: {_id: req.params.reactinoId}}}
+      {$pull: {reactions: {_id: req.params.reactionId}}}
     )
       .then((reactions) =>
 	!reactions

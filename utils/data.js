@@ -140,13 +140,11 @@ const getRandomEmail = () =>
       `${getRandomArrItem(names)}@${getRamdomArrItem(lorum)}.com`;
 
 const getRandomThoughts = (int) => {
-  const thoughts = [];
+  const thoughtArray = [];
   for (let i = 0; i < int; i++) {
-    thoughts.push({
-      thoughtText: getRandomArrItem(thoughts),
-    });
+    thoughtArray.push(getRandomArrItem(thoughts));
   }
-  return thoughts;
+  return thoughtArray;
 }
 
 
