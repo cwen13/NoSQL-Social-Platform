@@ -17,14 +17,21 @@ connection.once("open", async () => {
     let {wroteUser, userId } = await User.collection.insertOne({username,email})
 
     const thoughts = getRandomThoughts(5);
-    console.log(thoughts);
+    for (const thought of thoughts) {
+      
+      let thoughtTransaction = await Thought.collection.insertOne(
+	{
+	  thoughtText: thought,
+	  username: username
+	}
+      );
 
-    Thought.collection.insertOne(
-      {
-	thoughtText: thoughts,
-	username: username
-      }
-    );
+      await User.findOneAndUpdate(
+	{username},
+	{$push: {thoughts: thoughtTransaction["insertedId"]}}
+      );
+    }
+    
   }
     
   console.log("Seeding is complete");
