@@ -38,7 +38,7 @@ module.exports = {
   // DONE route to post create new user
   createUser(req,res) {
     User.create(req.body)
-    ,then((user) => res.json(user))
+    .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -62,9 +62,9 @@ module.exports = {
   addFriend(req,res) {
     User.findOneAndUpdate(
       {_id: req.params.userId},
-      {$addToSet:
+      {$push:
        {
-	 friend: req.params.friendId
+	 friends: req.params.friendId
        }
       },
       {
@@ -74,7 +74,7 @@ module.exports = {
   
     ).then((friend) =>
       !friend
-	? res.status(404).json({message: "an not add this friend"})
+	? res.status(404).json({message: "They not add this friend"})
 	: res.json(friend))
       .catch((err) => res.json(err));
   },
